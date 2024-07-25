@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:nb_utils/nb_utils.dart';
+//import 'package:nb_utils/nb_utils.dart';
 import 'package:template/app_router.dart';
 
 import 'constants/themes.dart';
@@ -10,7 +10,7 @@ import 'domain/models/scroll_behavior.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await initialize();
+  //await initialize();
   DioHelper.init();
   runApp(
     EasyLocalization(
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       debugShowCheckedModeBanner: false,
-      navigatorKey: navigatorKey,
+      //navigatorKey: navigatorKey,
       theme: themeData,
       darkTheme: darkThemeData,
       scrollBehavior: const MyScrollBehavior(),
