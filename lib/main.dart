@@ -2,16 +2,19 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 //import 'package:nb_utils/nb_utils.dart';
 import 'package:template/app_router.dart';
+import 'package:template/domain/helpers/shared_prefs.dart';
 
 import 'constants/themes.dart';
 import 'domain/helpers/dio_helper.dart';
 import 'domain/models/scroll_behavior.dart';
+import 'package:sizer/sizer.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   //await initialize();
   DioHelper.init();
+  SharedPrefsHelpers.init();
   runApp(
     EasyLocalization(
       supportedLocales: const [
@@ -33,18 +36,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      debugShowCheckedModeBanner: false,
-      //navigatorKey: navigatorKey,
-      theme: themeData,
-      darkTheme: darkThemeData,
-      scrollBehavior: const MyScrollBehavior(),
-      onGenerateRoute: appRouter.generateRoute,
-    );
+    return Sizer(builder: (context, orientation, deviceType) {
+      return MaterialApp(
+        title: 'Flutter Demo',
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        debugShowCheckedModeBanner: false,
+        //navigatorKey: navigatorKey,
+        theme: themeData,
+        darkTheme: darkThemeData,
+        scrollBehavior: const MyScrollBehavior(),
+        onGenerateRoute: appRouter.generateRoute,
+      );
+    });
   }
 }
 

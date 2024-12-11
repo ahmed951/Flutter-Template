@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import '../../constants/globals.dart';
+
+import '../../constants/strings.dart';
 
 class DioHelper {
   static Dio? dio;
