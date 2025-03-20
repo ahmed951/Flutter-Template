@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "ejada_eim" "\0"
+            VALUE "FileDescription", "towa_mowakeb" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "ejada_eim" "\0"
+            VALUE "InternalName", "towa_mowakeb" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "ejada_eim.exe" "\0"
-            VALUE "ProductName", "ejada_eim" "\0"
+            VALUE "OriginalFilename", "towa_mowakeb.exe" "\0"
+            VALUE "ProductName", "towa_mowakeb" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

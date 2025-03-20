@@ -49,6 +49,8 @@ abstract class CustomTextStyle {
   get black14w600;
   get white20w600;
   get green16w400;
+  get breadcrumbActive;
+  get breadcrumbInactive;
   factory CustomTextStyle() {
     return CustomTextStyleMedium();
 
@@ -219,6 +221,12 @@ class CustomTextStyleMedium implements CustomTextStyle {
   @override
   get green16w400 => const TextStyle(
       color: Colors.green, fontSize: 16, fontWeight: FontWeight.w400);
+  @override
+  get breadcrumbActive => const TextStyle(
+      color: mainColor, fontSize: 16, fontWeight: FontWeight.w600);
+  @override
+  get breadcrumbInactive => const TextStyle(
+      color: breadCrumbColor, fontSize: 16, fontWeight: FontWeight.w500);
 }
 
 /* class CustomTextStyleLarge implements CustomTextStyle {

@@ -1,9 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:template/constants/colors.dart';
 
-import '../../../constants/text_styles.dart';
+import '../../constants/text_styles.dart';
 
-Widget defaultButton({text, func, expanded = true, height}) => SizedBox(
+Widget defaultButton({text, func, expanded = true, height, enabled = true}) =>
+    SizedBox(
+      width: expanded ? double.infinity : null,
+      height: height ?? 50,
+      child: ElevatedButton(
+        style: ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+            ),
+            backgroundColor: MaterialStateProperty.all<Color>(
+                enabled ? mainColor : greyColor)),
+        onPressed: enabled ? func : null,
+        child: Text(
+          text,
+          style: enabled
+              ? CustomTextStyle().white20w600
+              : CustomTextStyle().white20w600,
+        ),
+      ),
+    );
+
+Widget defaultButtonWithIcon({text, func, expanded = true, height, icon}) =>
+    SizedBox(
       width: expanded ? double.infinity : null,
       height: height ?? 50,
       child: ElevatedButton(
@@ -15,9 +39,21 @@ Widget defaultButton({text, func, expanded = true, height}) => SizedBox(
             ),
             backgroundColor: MaterialStateProperty.all<Color>(mainColor)),
         onPressed: func,
-        child: Text(
-          text,
-          style: CustomTextStyle().white20w600,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              color: Colors.white,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Text(
+              text,
+              style: CustomTextStyle().white20w600,
+            ),
+          ],
         ),
       ),
     );
@@ -150,3 +186,22 @@ Widget defaultTextButtonWithIcon({
             ),
           )),
     );
+Container defaultIconButton({icon, func}) {
+  return Container(
+    decoration: BoxDecoration(
+      color: Colors.white,
+      border: Border.all(
+        color: mainColor,
+      ),
+      borderRadius: BorderRadius.circular(10),
+    ),
+    child: IconButton(
+      onPressed: func,
+      icon: Icon(
+        icon,
+        size: 30,
+        color: mainColor,
+      ),
+    ),
+  );
+}

@@ -1,91 +1,60 @@
 class LoginModel {
-  bool? success;
-  int? statusCode;
-  String? message;
-  int? count;
-  Data? data;
+  String? id;
+  String? email;
+  String? firstName;
+  String? lastName;
+  String? userName;
+  String? token;
+  String? imagePath;
+  List<String>? roles;
+  int? customerId;
+  String? deviceToken;
+  String? sapSalesManCode;
+  List<String>? permissions;
 
   LoginModel(
-      {this.success, this.statusCode, this.message, this.count, this.data});
+      {this.id,
+      this.email,
+      this.firstName,
+      this.lastName,
+      this.userName,
+      this.token,
+      this.imagePath,
+      this.roles,
+      this.customerId,
+      this.deviceToken,
+      this.sapSalesManCode,
+      this.permissions});
 
   LoginModel.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
-    statusCode = json['statusCode'];
-    message = json['message'];
-    count = json['count'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['success'] = success;
-    data['statusCode'] = statusCode;
-    data['message'] = message;
-    data['count'] = count;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
-    return data;
-  }
-}
-
-class Data {
-  String? id;
-  String? message;
-  bool? isAuthenticated;
-  String? email;
-  List<String>? roles;
-  String? token;
-  String? refreshToken;
-  String? refreshTokenExpiration;
-  bool? isActive;
-  bool? isEmailAuthonticated;
-  int? timeZone;
-  String? fullName;
-
-  Data(
-      {this.id,
-      this.message,
-      this.isAuthenticated,
-      this.email,
-      this.roles,
-      this.token,
-      this.refreshToken,
-      this.refreshTokenExpiration,
-      this.isActive,
-      this.isEmailAuthonticated,
-      this.timeZone,
-      this.fullName});
-
-  Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    message = json['message'];
-    isAuthenticated = json['isAuthenticated'];
     email = json['email'];
-    roles = json['roles'].cast<String>();
+    firstName = json['firstName'];
+    lastName = json['lastName'];
+    userName = json['userName'];
     token = json['token'];
-    refreshToken = json['refreshToken'];
-    refreshTokenExpiration = json['refreshTokenExpiration'];
-    isActive = json['isActive'];
-    isEmailAuthonticated = json['isEmailAuthonticated'];
-    timeZone = json['timeZone'];
-    fullName = json['fullName'];
+    imagePath = json['imagePath'];
+    roles = json['roles'].cast<String>();
+    customerId = json['customerId'];
+    deviceToken = json['deviceToken'];
+    sapSalesManCode = json['sapSalesManCode'];
+    permissions = json['permissions'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['message'] = message;
-    data['isAuthenticated'] = isAuthenticated;
     data['email'] = email;
-    data['roles'] = roles;
+    data['firstName'] = firstName;
+    data['lastName'] = lastName;
+    data['userName'] = userName;
     data['token'] = token;
-    data['refreshToken'] = refreshToken;
-    data['refreshTokenExpiration'] = refreshTokenExpiration;
-    data['isActive'] = isActive;
-    data['isEmailAuthonticated'] = isEmailAuthonticated;
-    data['timeZone'] = timeZone;
-    data['fullName'] = fullName;
+    data['imagePath'] = imagePath;
+    data['roles'] = roles;
+    data['customerId'] = customerId;
+    data['deviceToken'] = deviceToken;
+    data['sapSalesManCode'] = sapSalesManCode;
+    data['permissions'] = permissions;
     return data;
   }
 }

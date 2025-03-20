@@ -25,6 +25,12 @@ class _SplashScreenState extends State<SplashScreen> {
       String? token = await SharedPrefsHelpers.getData(key: "token");
       userToken = token ?? "";
       debugPrint("token $token");
+      if (token != null) {
+        userPermissionsList =
+            await SharedPrefsHelpers.getListData(key: "permissions");
+        roles = await SharedPrefsHelpers.getListData(key: "roles");
+        print("roles $roles ");
+      }
 
       // ignore: use_build_context_synchronously
       await Navigator.pushNamedAndRemoveUntil(context,

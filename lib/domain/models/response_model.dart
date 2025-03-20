@@ -1,41 +1,41 @@
 class Response {
-  bool? success;
   int? statusCode;
-  String? message;
-  int? count;
-  Data? data;
+  String? data;
 
-  Response(
-      {this.success, this.statusCode, this.message, this.count, this.data});
+  Response({this.statusCode, this.data});
 
   Response.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
     statusCode = json['statusCode'];
-    message = json['message'];
-    count = json['count'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['success'] = success;
     data['statusCode'] = statusCode;
-    data['message'] = message;
-    data['count'] = count;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
+
+    data['data'] = data;
+
     return data;
   }
 }
 
-class Data {
-  Data();
+/* class Data {
+  int? statusCode;
+  String? message; // Renamed for clarity
 
-  Data.fromJson(Map<String, dynamic> json);
+  Data({this.statusCode, this.message});
+
+  Data.fromJson(Map<String, dynamic> json) {
+    statusCode = json['statusCode'];
+    // Safely parse `data` as a String
+    message = json['data'];
+  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['statusCode'] = statusCode;
+    data['data'] = message; // Ensure it's serialized correctly
     return data;
   }
 }
+ */

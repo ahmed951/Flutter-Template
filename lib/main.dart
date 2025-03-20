@@ -1,9 +1,14 @@
+import 'dart:io';
+
+import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 //import 'package:nb_utils/nb_utils.dart';
 import 'package:template/app_router.dart';
 import 'package:template/domain/helpers/shared_prefs.dart';
 
+import 'bloc/bloc_observer.dart';
+import 'constants/globals.dart';
 import 'constants/themes.dart';
 import 'domain/helpers/dio_helper.dart';
 import 'domain/models/scroll_behavior.dart';
@@ -11,10 +16,13 @@ import 'package:sizer/sizer.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  Bloc.observer = MyBlocObserver();
   //await initialize();
   DioHelper.init();
-  SharedPrefsHelpers.init();
+  HttpOverrides.global = MyHttpOverrides();
+  await SharedPrefsHelpers.init();
+  //SharedPrefsHelpers.deleteData(key: "token");
+  EasyLocalization.logger.enableLevels = [];
   runApp(
     EasyLocalization(
       supportedLocales: const [
@@ -38,62 +46,28 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
       return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Mowakeb',
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
         debugShowCheckedModeBanner: false,
         //navigatorKey: navigatorKey,
         theme: themeData,
+        themeMode: ThemeMode.light,
         darkTheme: darkThemeData,
         scrollBehavior: const MyScrollBehavior(),
         onGenerateRoute: appRouter.generateRoute,
+        navigatorKey: navigatorKey,
       );
     });
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
+class MyHttpOverrides extends HttpOverrides {
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Flutter Demo Home Page'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

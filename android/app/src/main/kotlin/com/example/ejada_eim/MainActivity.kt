@@ -1,4 +1,4 @@
-package com.example.template
+package com.towa.mowakeb
 
 import io.flutter.embedding.android.FlutterActivity
 

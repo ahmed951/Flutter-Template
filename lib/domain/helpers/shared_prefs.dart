@@ -59,4 +59,8 @@ class SharedPrefsHelpers {
   static Future<bool> hasKey(String key) async {
     return prefs!.containsKey(key);
   }
+
+  static clear() async {
+    return prefs!.clear();
+  }
 }

@@ -1,43 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:template/constants/colors.dart';
 
-import '../../../constants/text_styles.dart';
+import '../../constants/text_styles.dart';
 //import 'dart:ui' as ui;
 
-Widget defaultFormField(
-  context, {
-  required TextEditingController controller,
-  required TextInputType type,
-  Function? onSubmit,
-  ValueSetter<String>? onChange,
-  var onTap,
-  bool isPassword = false,
-  required validate,
-  String? label,
-  IconData? prefix,
-  IconData? suffix,
-  Widget? suffixWidget,
-  var suffixPressed,
-  bool isClickable = true,
-  bool readOnly = false,
-  int minLine = 1,
-  int maxLine = 1,
-  double padding = 30,
-  double suffixSize = 25,
-  bool showBorder = true,
-  double borderRadius = 5,
-  String? hint,
-  bool isRTL = false,
-  bool paddingBottom = true,
-  Color? iconColor,
-  Color? borderColor,
-  Color? fillColor,
-  Color? textColor,
-  double? borderWidth,
-}) {
+Widget defaultFormField(context,
+    {required TextEditingController controller,
+    required TextInputType type,
+    Function? onSubmit,
+    ValueSetter<String>? onChange,
+    var onTap,
+    bool isPassword = false,
+    required validate,
+    String? label,
+    IconData? prefix,
+    IconData? suffix,
+    Widget? suffixWidget,
+    var suffixPressed,
+    bool isClickable = true,
+    bool readOnly = false,
+    int minLine = 1,
+    int maxLine = 1,
+    double padding = 30,
+    double suffixSize = 25,
+    bool showBorder = true,
+    double borderRadius = 5,
+    String? hint,
+    bool isRTL = false,
+    bool paddingBottom = true,
+    Color? iconColor,
+    Color? borderColor,
+    Color? fillColor,
+    Color? textColor,
+    double? borderWidth,
+    bool isRequired = false,
+    bool isPrice = false,
+    String? title}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
+      if (title != null)
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Row(
+            children: [
+              Text(
+                title,
+                style: CustomTextStyle().black16w500,
+              ),
+              if (isRequired)
+                Text(
+                  " *",
+                  style:
+                      CustomTextStyle().black16w500.copyWith(color: Colors.red),
+                ),
+            ],
+          ),
+        ),
       Focus(
         debugLabel: hint,
         child: Builder(builder: (context) {
@@ -92,19 +111,29 @@ Widget defaultFormField(
                     color: borderColor ?? Colors.transparent,
                     width: borderWidth ?? 0.0),
               ),
-              suffixIcon: suffix != null && suffixWidget == null
-                  ? Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: IconButton(
-                        onPressed: suffixPressed,
-                        icon: Icon(
-                          suffix,
-                          size: suffixSize,
-                          color: iconColor ?? greyColor,
+              suffixIcon: isPrice
+                  ? const Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        "\$",
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontFamily: 'Riyal',
                         ),
-                      ),
-                    )
-                  : suffixWidget,
+                      ))
+                  : suffix != null && suffixWidget == null
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: IconButton(
+                            onPressed: suffixPressed,
+                            icon: Icon(
+                              suffix,
+                              size: suffixSize,
+                              color: iconColor ?? greyColor,
+                            ),
+                          ),
+                        )
+                      : suffixWidget,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(borderRadius),
               ),
